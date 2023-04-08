@@ -1,6 +1,20 @@
+let mongoose = require("mongoose")
 let express = require("express")
 let app = express();
 let port = 3000;
+
+
+let DB = "mongodb+srv://mernstack:<aditya@10>@cluster0.wsq6a7p.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(DB , {
+    useNewUrlParser : true ,
+    useCreateIndex:true  , 
+    useUnifiedTopology : true , 
+    useFindAndModify: false, 
+}).then(()=>{
+    console.log("database connected successfully")
+}).catch((error)=>{
+    console.log("error")
+})
 
 
 // middleware
