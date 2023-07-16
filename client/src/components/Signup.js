@@ -1,33 +1,55 @@
 import React from 'react'
-
+import { NavLink, Routes, Route, Link, BrowserRouter } from "react-router-dom"
+import randomImg from "../images/download.jpg"
 export default function Signup() {
   return (
     <>
 
       <div className='extra'>Signup</div>
 
-
-      <form action="register" method="POST">
-        <label htmlFor="">First Name</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          autoComplete='off' placeholder="firstname" name="firstname" />
-
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          autoComplete='off' placeholder="lastname" name="lastname" />
-
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          autoComplete='off' placeholder="email" name="email" />
+      <div className='box'>
 
 
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          autoComplete='off' placeholder="password" name="password" />
+
+        <form action="register" method="POST">
+          <label htmlFor="">Name</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' placeholder="Name" name="name" />
+
+          <label htmlFor="">email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' placeholder="email" name="email" />
 
 
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-          autoComplete='off' placeholder="confirmpassword" name="confirmpassword" />
+          <label htmlFor="">phone</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' placeholder="phone number" name="phone" />
 
-        <button type="submit">register</button>
-      </form>
+
+          <label htmlFor="">profession</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' placeholder="profession" name="profession" />
+
+
+
+          <label htmlFor="">password</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' placeholder="password" name="password" />
+
+          <label htmlFor="">cpassword</label>
+
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' placeholder="confirmpassword" name="cpassword" />
+
+          <button type="submit" name='submit'>register</button>
+        </form>
+
+        <div>
+
+          <img src={randomImg} alt="fegrfghtht" />
+          <NavLink to="/login">I am already registerd</NavLink>
+        </div>
+      </div>
 
     </>
   )
