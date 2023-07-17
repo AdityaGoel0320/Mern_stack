@@ -17,3 +17,15 @@ label {
   align-items: center;
   gap: 30px;
 }
+
+
+
+.small_box{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 8px solid red;
+  margin: 30px;
+  width: fit-content;
+  padding: 5px ;
+}
