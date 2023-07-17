@@ -4,7 +4,7 @@ import randomImg from "../images/download.jpg"
 export default function Signup() {
 
 
-  // now storing from data in variable usinf useState
+  // now storing from data in variable using useState
   const [User, setUser] = useState(
     {
       name: "",
@@ -28,6 +28,10 @@ export default function Signup() {
 
   }
 
+  let postData = async () => {
+    console.log("hi")
+  }
+
   return (
 
 
@@ -39,7 +43,7 @@ export default function Signup() {
 
 
 
-        <form action="register" method="POST">
+        <form method="POST">
           <label htmlFor="">Name</label>
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             autoComplete='off' value={User.name} onChange={handleInputs} placeholder="Name" name="name" />
@@ -69,7 +73,8 @@ export default function Signup() {
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
             autoComplete='off' value={User.cpassword} onChange={handleInputs} placeholder="confirmpassword" name="cpassword" />
 
-          <button type="submit" name='submit'>register</button>
+
+          <input type="submit" value="register" onClick={postData} placeholder='Register' />
         </form>
 
         <div>
