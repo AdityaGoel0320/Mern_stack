@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Routes, Route, Link, BrowserRouter } from "react-router-dom"
+import { NavLink, Routes, Route, Link, BrowserRouter, useNavigate } from "react-router-dom"
 import randomImg from "../images/download.jpg"
 export default function Signup() {
 
@@ -28,8 +28,51 @@ export default function Signup() {
 
   }
 
-  let postData = async () => {
-    console.log("hi")
+
+  let history = useNavigate();
+
+  // function to send data to backend
+
+
+  let postData = async (e) => {
+    // to stop default behavioutr form to reload on click
+    e.preventDefault();
+
+
+    let { name, email, phone, work, password, cpassword } = User;
+
+
+
+    let response = await fetch("/register", {
+      method: "POST",
+      header: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({name, email, phone, work, password, cpassword
+      })
+    })
+    console.log(name)
+
+
+    let data = await response.json();
+
+    if (data.status === 422 || !data) {
+      window.alert("invalid registration")
+      console.log("invalid registration")
+
+    }
+
+    else {
+      window.alert("registration successfull")
+      console.log("registration successfull")
+
+      history.push("/login")
+
+
+    }
+
+
+
   }
 
   return (
@@ -82,10 +125,13 @@ export default function Signup() {
           <img src={randomImg} alt="fegrfghtht" />
           <NavLink to="/login">I am already registerd</NavLink>
         </div>
+
+
+
       </div>
 
 
-      
+
 
     </>
   )
