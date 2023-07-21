@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 
 export default function Advanceinput() {
-    const [val1, setval1] = useState()
-    const [val2, setval2] = useState()
-    const [text, settext] = useState()
     const [arr, setarr] = useState([])
+
+    const [x, setx] = useState(0)
 
     const [obj, setobj] = useState({
         title: "",
-        content: "",
+        name: "",
     });
 
     // ab sabke liye ek hi onchange bana na hai
@@ -26,33 +25,30 @@ export default function Advanceinput() {
     }
 
 
-    let onclick = () => {
-        setarr((predata) => {
-            return [...predata, obj]
-        })
+    let onclick = (e) => {
+        console.log("btn clicked")
+        setx(x+1) ; 
+        e.preventDefault();
     }
 
     return (
         <div>
+            <form action="POST">
 
 
-            <input type="text" value={obj.title} name="title" onChange={onchange} placeholder="first" />
+                <input type="text" value={obj.title} name="title" onChange={onchange} placeholder="first" />
 
-            <input type="text" value={obj.content} name="content" onChange={onchange} placeholder="second" />
+                <input type="text" value={obj.name} name="name" onChange={onchange} placeholder="second" />
 
-            <button onClick={onclick}>Click me</button>
+                <button type='submit' onClick={onclick}>Click me {x} times</button>
+            </form>
+
+            <br />
+           <span>Title is :- </span> {obj.title}
+            <br />
+            <span>Name is : -</span> {obj.name}
 
 
-            {obj.title}
-            {obj.content}
-
-            {/* {text} */}
-            <h1>
-                {arr.map((x) => {
-                    return x;
-
-                })}
-            </h1>
         </div>
 
     )
