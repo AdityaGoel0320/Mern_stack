@@ -16,7 +16,7 @@ export default function App() {
 
   return (
     <>
-      {/* <Navbar />
+      <Navbar />
 
       <Routes>
 
@@ -26,7 +26,7 @@ export default function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='*' element={<Errorpage />} />
-      </Routes> */}
+      </Routes>
 
 
 
