@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import "./App.css"
 
 import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
@@ -13,12 +13,9 @@ import Errorpage from './components/Errorpage'
 
 export default function App() {
 
-  const [x, setx] = useState(0)
 
-  let fnc = ()=>{
-    console.log("clicked")
-    setx(x+1)
-  }
+  
+
   return (
     <>
       {/* <Navbar />
@@ -34,9 +31,12 @@ export default function App() {
       </Routes> */}
 
 
-      <h1>hello</h1>
 
-      <button onClick={fnc}>Click me {x}</button>
+
+      <input onChange={onchange} value={x} name='input1' type="text" placeholder='gvbffbu' />
+
+
+
 
 
 
