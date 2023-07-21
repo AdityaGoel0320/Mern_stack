@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 
 export default function Advanceinput() {
-    const [arr, setarr] = useState([])
-
     const [x, setx] = useState(0)
 
     const [obj, setobj] = useState({
@@ -27,7 +25,7 @@ export default function Advanceinput() {
 
     let onclick = (e) => {
         console.log("btn clicked")
-        setx(x+1) ; 
+        setx(x + 1);
         e.preventDefault();
     }
 
@@ -44,7 +42,7 @@ export default function Advanceinput() {
             </form>
 
             <br />
-           <span>Title is :- </span> {obj.title}
+            <span>Title is :- </span> {obj.title}
             <br />
             <span>Name is : -</span> {obj.name}
 
