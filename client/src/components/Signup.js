@@ -18,11 +18,10 @@ export default function Signup() {
   )
 
 
-  let name, value;
   let handleInputs = (e) => {
     console.log(e)
-    name = e.target.name;
-    value = e.target.value;
+
+    let [name , value] =  e.target  ;
 
     setUser({ ...User, [name]: value })
 
