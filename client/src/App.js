@@ -10,12 +10,17 @@ import Contact from './components/Contact'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Errorpage from './components/Errorpage'
+import Advanceinput from './components/Advanceinput'
 
 export default function App() {
 
 
-  
-
+  const [x, setx] = useState()
+  let onchange = (e) => {
+    console.log(e.target.value)
+    setx(e.target.value)
+    console.log("x is :- " + x)
+  }
   return (
     <>
       {/* <Navbar />
@@ -33,7 +38,8 @@ export default function App() {
 
 
 
-      <input onChange={onchange} value={x} name='input1' type="text" placeholder='gvbffbu' />
+
+      <Advanceinput />
 
 
 
