@@ -64,10 +64,12 @@ export default function Signup() {
 
 
     let data = await response.json();
-    console.log("dsfdf")
+
+    console.log("response tak")
+
     if (response.status === 422 || !data) {
-      window.alert("invalid registration")
       console.log("invalid registration")
+      window.alert("invalid registration")
 
     }
 
