@@ -4,7 +4,9 @@ import randomImg from "../images/download.jpg"
 export default function Signup() {
 
 
-  // now storing from data in variable using useState
+  // now storing form data in js object using useState
+
+  // User ==== obj
   const [User, setUser] = useState(
     {
       name: "",
@@ -13,19 +15,19 @@ export default function Signup() {
       work: "",
       password: "",
       cpassword: "",
-
     }
   )
 
 
-  let handleInputs = (e) => {
-    console.log(e)
+  let onchange = (e) => {
 
     let [name , value] =  e.target  ;
 
     setUser({ ...User, [name]: value })
-
   }
+
+
+
 
 
   let history = useNavigate();
@@ -34,22 +36,23 @@ export default function Signup() {
 
 
   let postData = async (e) => {
+
     // to stop default behavioutr form to reload on click
     e.preventDefault();
-
-
     let { name, email, phone, work, password, cpassword } = User;
 
 
 
     let response = await fetch("/register", {
       method: "POST",
-      header: {
-        "content-type": "application/json"
+      headers: {
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({name, email, phone, work, password, cpassword
       })
     })
+
+
     console.log(name)
 
 
@@ -88,32 +91,31 @@ export default function Signup() {
         <form method="POST">
           <label htmlFor="">Name</label>
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' value={User.name} onChange={handleInputs} placeholder="Name" name="name" />
+            autoComplete='off' value={User.name} onChange={onchange} placeholder="Name" name="name" />
 
           <label htmlFor="">email</label>
           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' value={User.email} onChange={handleInputs} placeholder="email" name="email" />
+            autoComplete='off' value={User.email} onChange={onchange} placeholder="email" name="email" />
 
 
           <label htmlFor="">phone</label>
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' value={User.phone} onChange={handleInputs} placeholder="phone number" name="phone" />
+            autoComplete='off' value={User.phone} onChange={onchange} placeholder="phone number" name="phone" />
 
 
           <label htmlFor="">profession</label>
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' value={User.profession} onChange={handleInputs} placeholder="profession" name="profession" />
-
+            autoComplete='off' value={User.profession} onChange={onchange} placeholder="profession" name="profession" />
 
 
           <label htmlFor="">password</label>
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' value={User.password} onChange={handleInputs} placeholder="password" name="password" />
+            autoComplete='off' value={User.password} onChange={onchange} placeholder="password" name="password" />
 
           <label htmlFor="">cpassword</label>
-
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' value={User.cpassword} onChange={handleInputs} placeholder="confirmpassword" name="cpassword" />
+            autoComplete='off' value={User.cpassword} onChange={onchange} placeholder="confirmpassword" name="cpassword" />
+
 
 
           <input type="submit" value="register" onClick={postData} placeholder='Register' />
