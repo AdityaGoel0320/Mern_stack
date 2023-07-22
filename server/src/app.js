@@ -3,6 +3,8 @@ let dotenv = require("dotenv");
 dotenv.config({path:"./config.env"})
 
 
+let cors = require("cors")
+
 
 // importing important npm packages
 let express = require("express");
@@ -17,6 +19,9 @@ let User= require("./model/userSchema")
 
 // now making website understand data will conme in json 
 app.use(express.json())
+
+// cors 
+app.use(cors()) ; 
 
 // routing of pages
 app.use(require("./route/auth"))
