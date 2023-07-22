@@ -24,9 +24,7 @@ router.get("/register", (req, res) => {
 
 router.post("/register", async (req, res) => {
 
-
     try {
-
 
         let { name, email, phone, work, password, cpassword } = req.body;
 
@@ -44,14 +42,7 @@ router.post("/register", async (req, res) => {
                 return res.status(422).json({ error: "user already register" })
             }
 
-
             let newUserDetails = new User({ name, email, phone, work, password, cpassword })
-
-
-            // now here wer have to hash our pass and cpass so  using bcryptjs
-
-
-            // as in schema file we make a fnc pre which automatically run before saving as we make it as pre("save") thus before saving we want hashing we wrte acc to it in pre
 
 
             await newUserDetails.save();

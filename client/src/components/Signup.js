@@ -9,7 +9,7 @@ export default function Signup() {
     name: "",
     email: "",
     phone: "",
-    work: "",
+    profession: "",
     password: "",
     cpassword: "",
 
@@ -38,7 +38,7 @@ export default function Signup() {
   // }
 
 
-  let history = useNavigate();
+  let navigate = useNavigate();
 
   // function to send data to backend
 
@@ -47,15 +47,14 @@ export default function Signup() {
     // to stop default behavioutr form to reload on click
     e.preventDefault();
 
-
+    console.log("clicked")
     let { name, email, phone, work, password, cpassword } = obj;
-
-
+    console.log(obj)
 
     let response = await fetch("/register", {
       method: "POST",
-      header: {
-        "Content-Type": "Application/json"
+      headers: {
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name, email, phone, work, password, cpassword
@@ -65,8 +64,8 @@ export default function Signup() {
 
 
     let data = await response.json();
-console.log("dsfdf")
-    if (data.status === 422 || !data) {
+    console.log("dsfdf")
+    if (response.status === 422 || !data) {
       window.alert("invalid registration")
       console.log("invalid registration")
 
@@ -76,7 +75,7 @@ console.log("dsfdf")
       window.alert("registration successfull")
       console.log("registration successfull")
 
-      history.push("/login")
+      navigate("/login")
 
 
     }
