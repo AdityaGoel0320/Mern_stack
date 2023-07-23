@@ -21,18 +21,21 @@ export default function App() {
 
   const [arr, setarr] = useState([])
 
+  let fetchApi = async () => {
+    try {
+      let response = await axios.get("https://jsonplaceholder.typicode.com/posts")
+      console.log(response)
+    }
+    catch (error) {
+
+
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
 
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => {
-        console.log(response)
-
-        setarr(response.data);
-      })
-
-      .catch((error)=>{
-        console.log(error)
-      })
+    fetchApi();
   }, [])
 
 
@@ -65,7 +68,7 @@ export default function App() {
       <h3>mapp fnc</h3>
 
       {arr.map((value, index) => {
-        let { id, title , body } = value
+        let { id, title, body } = value
         return (
 
           <h1>{body}</h1>
