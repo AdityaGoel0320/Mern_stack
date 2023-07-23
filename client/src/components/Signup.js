@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import axios from "axios"
+
 import { NavLink, Routes, Route, Link, BrowserRouter, useNavigate } from "react-router-dom"
 import randomImg from "../images/download.jpg"
 export default function Signup() {
@@ -28,14 +30,6 @@ export default function Signup() {
     })
   }
 
-  // let onchange = (e) => {
-  //   console.log(e)
-
-  //   let [name , value] =  e.target  ;
-
-  //   setobj({ ...obj, [name]: value })
-
-  // }
 
 
   let navigate = useNavigate();
@@ -63,7 +57,9 @@ export default function Signup() {
     console.log(name)
 
 
-// https://jsonplaceholder.typicode.com/posts
+    // let response = await axios.post("http://localhost:8000/register", obj)
+
+
 
     let data = await response.json();
 
@@ -72,16 +68,12 @@ export default function Signup() {
     if (response.status === 422 || !data) {
       console.log("invalid registration")
       window.alert("invalid registration")
-
     }
 
     else {
       window.alert("registration successfull")
       console.log("registration successfull")
-
       navigate("/login")
-
-
     }
 
 
