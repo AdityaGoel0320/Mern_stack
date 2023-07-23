@@ -29,6 +29,10 @@ export default function App() {
 
         setarr(response.data);
       })
+
+      .catch((error)=>{
+        console.log(error)
+      })
   }, [])
 
 
