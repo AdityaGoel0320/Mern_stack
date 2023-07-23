@@ -25,6 +25,7 @@ export default function App() {
     try {
       let response = await axios.get("https://jsonplaceholder.typicode.com/posts")
       console.log(response)
+      setarr(response.data)
     }
     catch (error) {
 
@@ -71,7 +72,7 @@ export default function App() {
         let { id, title, body } = value
         return (
 
-          <h1>{body}</h1>
+          <h1>{id}</h1>
         )
       })}
 
