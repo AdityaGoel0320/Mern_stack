@@ -28,15 +28,6 @@ export default function Signup() {
     })
   }
 
-  // let onchange = (e) => {
-  //   console.log(e)
-
-  //   let [name , value] =  e.target  ;
-
-  //   setobj({ ...obj, [name]: value })
-
-  // }
-
 
   let navigate = useNavigate();
 
@@ -47,7 +38,7 @@ export default function Signup() {
     // to stop default behavioutr form to reload on click
     e.preventDefault();
 
-    console.log("clicked")
+    console.log("btn clicked")
     let { name, email, phone, work, password, cpassword } = obj;
     console.log(obj)
 
