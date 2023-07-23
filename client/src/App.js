@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./App.css"
 
 
@@ -17,16 +17,17 @@ import Advanceinput from './components/Advanceinput'
 import axios from "axios"
 
 export default function App() {
- 
+
 
   useEffect(() => {
-  
-    axios.get("https://jsonplaceholder.typicode.com/posts")
-    .then(()=>{
 
-    })
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+      .then((response) => {
+        console.log(response)
+
+      })
   }, [])
-  
+
 
   return (
 
