@@ -63,6 +63,8 @@ export default function Signup() {
     console.log(name)
 
 
+// https://jsonplaceholder.typicode.com/posts
+
     let data = await response.json();
 
     console.log("response tak")
