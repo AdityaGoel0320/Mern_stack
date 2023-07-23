@@ -60,13 +60,14 @@ export default function App() {
 
       <h3>mapp fnc</h3>
 
-      {/* {arr.map((val, index) => {
+      {arr.map((value, index) => {
+        let { id, title , body } = value
         return (
-          
-          <h1>{val}</h1>
+
+          <h1>{body}</h1>
         )
       })}
- */}
+
 
 
 
