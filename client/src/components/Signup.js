@@ -41,42 +41,40 @@ export default function Signup() {
     // to stop default behavioutr form to reload on click
     e.preventDefault();
 
-    console.log("clicked")
+    console.log("btn clicked")
+
+
     let { name, email, phone, work, password, cpassword } = obj;
-    console.log(obj)
 
-    let response = await fetch("/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name, email, phone, work, password, cpassword
+
+    try {
+
+      let response = await axios.post("/register", obj)
+      .then(() => {
+        console.log("axios worked")
       })
-    })
-    console.log(name)
+      console.log(name)
 
 
-    // let response = await axios.post("http://localhost:8000/register", obj)
+      let data = await response.json();
 
+      console.log("response tak")
 
+      if (response.status === 422 || !data) {
+        console.log("invalid registration")
+        window.alert("invalid registration")
+      }
 
-    let data = await response.json();
+      else {
+        window.alert("registration successfull")
+        console.log("registration successfull")
+        navigate("/login")
+      }
 
-    console.log("response tak")
-
-    if (response.status === 422 || !data) {
-      console.log("invalid registration")
-      window.alert("invalid registration")
     }
-
-    else {
-      window.alert("registration successfull")
-      console.log("registration successfull")
-      navigate("/login")
+    catch (error) {
+      console.log("errr")
     }
-
-
 
   }
 
