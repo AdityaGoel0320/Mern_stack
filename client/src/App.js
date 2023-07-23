@@ -19,12 +19,15 @@ import axios from "axios"
 export default function App() {
 
 
+  const [arr, setarr] = useState([])
+
   useEffect(() => {
 
     axios.get("https://jsonplaceholder.typicode.com/posts")
       .then((response) => {
         console.log(response)
 
+        setarr(response.data);
       })
   }, [])
 
@@ -55,8 +58,14 @@ export default function App() {
 
 
 
+      <h3>mapp fnc</h3>
 
-
+      {/* {arr.map((val, index) => {
+        return (
+          <h1>{val}</h1>
+        )
+      })}
+ */}
 
 
 
