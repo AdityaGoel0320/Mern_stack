@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import "./App.css"
+
+
 
 import { Routes, Route, Link, BrowserRouter } from "react-router-dom"
 
@@ -12,13 +14,28 @@ import Signup from './components/Signup'
 import Errorpage from './components/Errorpage'
 import Advanceinput from './components/Advanceinput'
 
-export default function App() {
+import axios from "axios"
 
+export default function App() {
+ 
+
+  useEffect(() => {
+  
+    axios.get("https://jsonplaceholder.typicode.com/posts")
+    .then(()=>{
+
+    })
+  }, [])
+  
 
   return (
+
+
+
+
     <>
 
-    <Advanceinput/>
+      {/* <Advanceinput />
       <Navbar />
 
       <Routes>
@@ -29,9 +46,11 @@ export default function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='*' element={<Errorpage />} />
-      </Routes>
+      </Routes> */}
 
 
+
+      <h1>Axios Data fetching</h1>
 
 
 
