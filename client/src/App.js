@@ -16,28 +16,11 @@ import Advanceinput from './components/Advanceinput'
 
 export default function App() {
 
-  let arr = [
-    {
-      name: "adf ",
-      age: "fdsfd",
-      p: "true"
-    },
-    {
-      name: "ncjdkf",
-      age: "sknfdgr",
-      p: "false"
-    }
-  ]
-
-  let z = arr.filter((x) => {
-  name.add()
-  })
-  console.log(z)
   return (
 
     <>
 
-      {/* <Advanceinput />
+      <Advanceinput />
       <Navbar />
 
       <Routes>
@@ -48,9 +31,9 @@ export default function App() {
         <Route exact path='/login' element={<Login />} />
         <Route exact path='/signup' element={<Signup />} />
         <Route exact path='*' element={<Errorpage />} />
-      </Routes> */}
+      </Routes>
 
-      {z}
+
 
 
 
