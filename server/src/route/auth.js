@@ -3,7 +3,6 @@ let express = require("express");
 let router = express.Router();
 let bcrypt = require("bcryptjs")
 
-
 let jwt = require("jsonwebtoken")
 
 
@@ -20,6 +19,7 @@ router.get("/", (req, res) => {
 
 router.get("/register", (req, res) => {
     // console.log(req.body)
+    
     res.send("register page using get ")
 })
 
