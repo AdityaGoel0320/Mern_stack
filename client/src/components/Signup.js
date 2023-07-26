@@ -12,7 +12,6 @@ export default function Signup() {
     profession: "",
     password: "",
     cpassword: "",
-
   }
   );
   let onchange = (e) => {
@@ -60,6 +59,7 @@ export default function Signup() {
       console.log("invalid registration")
       window.alert("invalid registration")
 
+      
     }
 
     else {
