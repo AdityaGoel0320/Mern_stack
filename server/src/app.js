@@ -23,6 +23,7 @@ app.use(express.json())
 // cors 
 app.use(cors()) ; 
 
+
 // routing of pages
 app.use(require("./route/auth"))
 
