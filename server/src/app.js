@@ -21,17 +21,7 @@ let User= require("./model/userSchema")
 app.use(express.json())
 
 // cors 
-
-const corsOptions = {
-    origin: "*", // Set your frontend domain here, or "*" to allow all origins
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  };
-  
-  app.use(cors(corsOptions));
-  
-// app.use(cors()) ; 
+app.use(cors()) ; 
 
 // routing of pages
 app.use(require("./route/auth"))

@@ -16,7 +16,6 @@ export default function App() {
       <div>
         <Advanceinput />
         <Navbar />
-        <Router>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
@@ -25,7 +24,6 @@ export default function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<Errorpage />} />
           </Routes>
-        </Router>
       </div>
     </>
   );

@@ -1,139 +1,138 @@
-import React, { useState } from 'react';
-import { NavLink, useNavigate } from "react-router-dom";
-import randomImg from "../images/download.jpg";
-
+import React, { useState } from 'react'
+import { NavLink, Routes, Route, Link, BrowserRouter, useNavigate } from "react-router-dom"
+import randomImg from "../images/download.jpg"
 export default function Signup() {
-  // now storing form data in variable using useState
-  const [obj, setObj] = useState({
+
+
+  // now storing from data in variable using useState
+  const [obj, setobj] = useState({
     name: "",
     email: "",
     phone: "",
     profession: "",
     password: "",
     cpassword: "",
-  });
+  }
+  );
+  let onchange = (e) => {
 
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setObj((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    setobj((predata) => {
+      return {
+        ...predata,
+        [name]: value,
+      }
+
+    })
+  }
+
+
+  let navigate = useNavigate();
 
   // function to send data to backend
-  const postData = async (e) => {
+
+
+  let postData = async (e) => {
+    // to stop default behavioutr form to reload on click
     e.preventDefault();
-    console.log("btn clicked");
-    
-    const { name, email, phone, profession, password, cpassword } = obj;
 
-    try {
-      const response = await fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, phone, work: profession, password, cpassword }),
-      });
+    console.log("btn clicked")
+    let { name, email, phone, work, password, cpassword } = obj;
+    console.log(obj)
 
-      const data = await response.json();
+    let response = await fetch("/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({name, email, phone, work, password, cpassword})
+    })
+    console.log(name)
 
-      if (response.status === 422 || !data) {
-        console.log("invalid registration");
-        window.alert("invalid registration");
-      } else {
-        window.alert("registration successful");
-        console.log("registration successful");
-        navigate("/login");
-      }
-    } catch (error) {
-      console.log("error in sending data");
+
+    let data = await response.json();
+
+    console.log("response tak")
+
+    if (response.status === 422 || !data) {
+      console.log("invalid registration")
+      window.alert("invalid registration")
+
+      
     }
-  };
+
+    else {
+      window.alert("registration successfull")
+      console.log("registration successfull")
+
+      navigate("/login")
+
+
+    }
+
+
+
+  }
 
   return (
+
+
     <>
+
       <div className='extra'>Signup</div>
+
       <div className='box'>
-        <form>
+
+
+
+        <form method="POST">
           <label htmlFor="">Name</label>
-          <input
-            type="text"
-            className="form-control"
-            autoComplete='off'
-            value={obj.name}
-            onChange={handleChange}
-            placeholder="Name"
-            name="name"
-          />
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' value={obj.name} onChange={onchange} placeholder="Name" name="name" />
 
-          <label htmlFor="">Email</label>
-          <input
-            type="email"
-            className="form-control"
-            autoComplete='off'
-            value={obj.email}
-            onChange={handleChange}
-            placeholder="Email"
-            name="email"
-          />
+          <label htmlFor="">email</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' value={obj.email} onChange={onchange} placeholder="email" name="email" />
 
-          <label htmlFor="">Phone</label>
-          <input
-            type="text"
-            className="form-control"
-            autoComplete='off'
-            value={obj.phone}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            name="phone"
-          />
 
-          <label htmlFor="">Profession</label>
-          <input
-            type="text"
-            className="form-control"
-            autoComplete='off'
-            value={obj.profession}
-            onChange={handleChange}
-            placeholder="Profession"
-            name="profession"
-          />
+          <label htmlFor="">phone</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' value={obj.phone} onChange={onchange} placeholder="phone number" name="phone" />
 
-          <label htmlFor="">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            autoComplete='off'
-            value={obj.password}
-            onChange={handleChange}
-            placeholder="Password"
-            name="password"
-          />
 
-          <label htmlFor="">Confirm Password</label>
-          <input
-            type="password"
-            className="form-control"
-            autoComplete='off'
-            value={obj.cpassword}
-            onChange={handleChange}
-            placeholder="Confirm Password"
-            name="cpassword"
-          />
+          <label htmlFor="">profession</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' value={obj.profession} onChange={onchange} placeholder="profession" name="profession" />
 
-          <input type="submit" value="Register" onClick={postData} />
+
+
+          <label htmlFor="">password</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' value={obj.password} onChange={onchange} placeholder="password" name="password" />
+
+          <label htmlFor="">cpassword</label>
+
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            autoComplete='off' value={obj.cpassword} onChange={onchange} placeholder="confirmpassword" name="cpassword" />
+
+
+          <input type="submit" value="register" onClick={postData} placeholder='Register' />
         </form>
 
         <div>
+
           <img src={randomImg} alt="fegrfghtht" />
-          <NavLink to="/login">I am already registered</NavLink>
+          <NavLink to="/login">I am already registerd</NavLink>
         </div>
+
+
+
       </div>
+
+
+
+
     </>
-  );
+  )
 }
