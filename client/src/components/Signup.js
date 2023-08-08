@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { NavLink, Routes, Route, Link, BrowserRouter, useNavigate } from "react-router-dom"
+import { NavLink, Routes , Route, Link, BrowserRouter, useNavigate } from "react-router-dom"
 import randomImg from "../images/download.jpg"
 export default function Signup() {
 
@@ -41,10 +41,10 @@ export default function Signup() {
     let { name, email, phone, work, password, cpassword } = obj;
     console.log(obj)
 
-    let response = await fetch("/register", {
+    let response = await fetch("http://localhost:8000/register", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json" , 
       },
       body: JSON.stringify({name, email, phone, work, password, cpassword})
     })
