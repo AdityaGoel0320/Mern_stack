@@ -9,7 +9,7 @@ export default function Signup() {
     name: "",
     email: "",
     phone: "",
-    profession: "",
+    work: "",
     password: "",
     cpassword: "",
   }
@@ -36,7 +36,6 @@ export default function Signup() {
   let postData = async (e) => {
     // to stop default behavioutr form to reload on click
     e.preventDefault();
-
     console.log("btn clicked")
     let { name, email, phone, work, password, cpassword } = obj;
     console.log(obj)
@@ -101,9 +100,9 @@ export default function Signup() {
             autoComplete='off' value={obj.phone} onChange={onchange} placeholder="phone number" name="phone" />
 
 
-          <label htmlFor="">profession</label>
+          <label htmlFor="">work</label>
           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' value={obj.profession} onChange={onchange} placeholder="profession" name="profession" />
+            autoComplete='off' value={obj.work} onChange={onchange} placeholder="work" name="work" />
 
 
 
