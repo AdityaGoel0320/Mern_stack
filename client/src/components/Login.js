@@ -22,7 +22,7 @@ export default function Login() {
     let data = await response.json();
 
     if (response.status === 400 || !data) {
-      window.alert('Invalid registration');
+      window.alert('Invalid login details');
     } else {
       window.alert('Registration successful');
       navigate('/');
