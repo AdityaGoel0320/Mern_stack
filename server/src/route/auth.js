@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
+const Authenticate = require("../middleware/authenticate");
+// const {  Authenticate } = require("../middleware/Authenticate");
 // const { SECRET_KEY } = require("../config"); // Import your secret key from a config file
 
 require("../db/conn");
@@ -14,6 +16,19 @@ router.get("/", (req, res) => {
 router.get("/register", (req, res) => {
     res.send("register page using get ");
 });
+
+
+router.get("/signin", (req, res) => {
+    res.send("Welcome to the sign-in page");
+});
+
+
+// router.get("/about",Authenticate ,  (req, res) => {
+//     console.log("about us ka page")
+//     res.send("Hello World from contact")
+// })
+
+
 
 router.post("/register", async (req, res) => {
     try {
@@ -43,9 +58,6 @@ router.post("/register", async (req, res) => {
     }
 });
 
-router.get("/signin", (req, res) => {
-    res.send("Welcome to the sign-in page");
-});
 
 router.post("/signin", async (req, res) => {
     try {
