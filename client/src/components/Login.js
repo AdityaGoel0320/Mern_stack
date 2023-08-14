@@ -1,41 +1,71 @@
-import React from 'react'
-import { NavLink, Routes, Route, Link, BrowserRouter } from "react-router-dom"
-import randomImg from "../images/download.jpg"
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import randomImg from '../images/download.jpg';
+
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  let navigate = useNavigate();
+
+  let loginUser = async (e) => {
+    e.preventDefault();
+
+    let response = await fetch('http://localhost:8000/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    let data = await response.json();
+
+    if (response.status === 400 || !data) {
+      window.alert('Invalid registration');
+    } else {
+      window.alert('Registration successful');
+      navigate('/');
+    }
+  };
+
   return (
-
     <>
-
-
       <div className='extra'>Login</div>
-
       <div className='box'>
-
         <div>
-
-          <img src={randomImg} alt="fegrfghtht" />
-          <NavLink to="/signup">Create a new Account</NavLink>
+          <img src={randomImg} alt='fegrfghtht' />
+          <NavLink to='/signup'>Create a new Account</NavLink>
         </div>
+        <form onSubmit={loginUser}>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            className='form-control'
+            id='exampleInputEmail1'
+            aria-describedby='emailHelp'
+            autoComplete='off'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder='Email'
+            name='email'
+          />
 
-        <form action="login" method="POST">
-          <label htmlFor="">email</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' placeholder="email" name="email" />
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            className='form-control'
+            id='exampleInputPassword1'
+            autoComplete='off'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder='Password'
+            name='password'
+          />
 
-
-
-          <label htmlFor="">password</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-            autoComplete='off' placeholder="password" name="password" />
-
-
-          <button type="submit" name='signin'>Login</button>
+          <button type='submit'>Login</button>
         </form>
-
-
       </div>
-
-
     </>
-  )
+  );
 }
