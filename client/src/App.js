@@ -8,13 +8,11 @@ import Contact from './components/Contact';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Errorpage from './components/Errorpage';
-import Advanceinput from './components/Advanceinput';
 
 export default function App() {
   return (
     <>
       <div>
-        <Advanceinput />
         <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />

@@ -24,10 +24,6 @@ router.get("/signin", (req, res) => {
 });
 
 
-// router.get("/about",Authenticate ,  (req, res) => {
-//     console.log("about us ka page")
-//     res.send("Hello World from contact")
-// })
 
 
 
@@ -96,6 +92,13 @@ router.post("/signin", async (req, res) => {
         res.status(500).json({ error: "Error in signing in" });
     }
 });
+
+
+
+router.get("/about", Authenticate ,  (req, res) => {
+    console.log("about us ka page")
+    res.send("Hello World from contact")
+})
 
 module.exports = router;
 
