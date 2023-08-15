@@ -14,6 +14,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
+    
     res.send("register page using get ");
 });
 
