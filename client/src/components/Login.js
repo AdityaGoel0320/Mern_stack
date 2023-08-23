@@ -10,7 +10,7 @@ export default function Login() {
 
   let loginUser = async (e) => {
     e.preventDefault();
-
+    console.log(email)
     let response = await fetch('http://localhost:8000/signin', {
       method: 'POST',
       headers: {
@@ -37,7 +37,7 @@ export default function Login() {
           <img src={randomImg} alt='fegrfghtht' />
           <NavLink to='/signup'>Create a new Account</NavLink>
         </div>
-        <form onSubmit={loginUser}>
+        <form method="POST">
           <label htmlFor='email'>Email</label>
           <input
             type='email'
@@ -63,7 +63,7 @@ export default function Login() {
             name='password'
           />
 
-          <button type='submit'>Login</button>
+          <button type='submit' onClick={loginUser}>Login</button>
         </form>
       </div>
     </>
