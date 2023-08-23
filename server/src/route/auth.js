@@ -7,6 +7,10 @@ const Authenticate = require("../middleware/authenticate");
 // const {  Authenticate } = require("../middleware/Authenticate");
 // const { SECRET_KEY } = require("../config"); // Import your secret key from a config file
 
+
+
+// for handling of form
+
 require("../db/conn");
 
 router.get("/", (req, res) => {
@@ -80,7 +84,7 @@ router.post("/signin", async (req, res) => {
             //     httpOnly: true, // Corrected attribute name
             // });
             res.cookie("jwtogin", loginNewToken);
-        
+            console.log(req.cookies.jwtLogin)
 
             if (!passwordIsMatch) {
                 return res.status(400).json({ error: "Invalid credentials wrong password" });

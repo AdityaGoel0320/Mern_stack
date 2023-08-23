@@ -6,6 +6,9 @@ dotenv.config({path:"./config.env"})
 let cors = require("cors")
 
 
+
+
+
 // importing important npm packages
 let express = require("express");
 let app = express();
@@ -17,8 +20,14 @@ let port = process.env.PORT || 3000 ;
 require("./db/conn")
 let User= require("./model/userSchema")
 
+
+let cookieParser = require("cookie-parser")
+app.use(cookieParser());
+
+
 // now making website understand data will conme in json 
 app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
 
 // cors 
 app.use(cors()) ; 
