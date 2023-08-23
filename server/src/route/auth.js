@@ -71,18 +71,25 @@ router.post("/signin", async (req, res) => {
             const passwordIsMatch = await bcrypt.compare(password, userLogin.password);
 
             if (!passwordIsMatch) {
-                return res.status(400).json({ error: "Invalid credentials" });
+                return res.status(400).json({ error: "Invalid credentials wrong password" });
             } else {
-                // const token = jwt.sign({ _id: userLogin._id }, SECRET_KEY); // Create a token
-                // userLogin.tokens = userLogin.tokens.concat({ token }); // Add token to user's tokens array
-                // await userLogin.save();
+                
+
+                let loginNewToken = await userLogin.generateAuthToken();
+
+
+                // now to save this token so we add in cookie in login page
+                res.cookie("jwtLogin", loginNewToken)
+        
+        
+
+                return res.status(200).json({ message: "User logged in successfully" });
+
 
                 // res.cookie("jetToken", token, {
                 //     expires: new Date(Date.now() + 9999999999999),
                 //     httpOnly: true,
                 // });
-
-                return res.status(200).json({ message: "User logged in successfully" });
             }
         } else {
             return res.status(400).json({ error: "User is not registered" });

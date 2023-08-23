@@ -35,14 +35,12 @@ let userSchema = new mongoose.Schema(
 
 
         // as token has to be added also
-        tokens: [
-            {
-                token: {
-                    type: String,
-                    required: true,
-                }
+        tokenArray: [{
+            tokenObj: {
+                type: String,
+                required: true,
             }
-        ]
+        }]
     }
 )
 
@@ -65,13 +63,19 @@ userSchema.pre("save", async function (next) {
 userSchema.methods.generateAuthToken = async function () {
     try {
 
-        let newToken = jwt.sign({ id: this._id }, process.env.SECRET_KEY)
+
+        let tokenGenerated = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
+
 
         // now adding this new token in databse
-        this.tokens = this.tokens.concat({ token: newToken })
 
-        await this.save() ; 
-        return newToken ; 
+        this.tokenArray = this.tokenArray.concat({tokenObj:tokenGenerated})
+        await this.save();
+
+
+        return tokenGenerated ; 
+
+        
     } catch (error) {
         console.log("error in token fnc in scehma file")
     }
