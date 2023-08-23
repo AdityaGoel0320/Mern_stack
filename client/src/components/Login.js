@@ -24,7 +24,7 @@ export default function Login() {
     if (response.status === 400 || !data) {
       window.alert('Invalid login details');
     } else {
-      window.alert('Registration successful');
+      window.alert('Login successful');
       navigate('/');
     }
   };

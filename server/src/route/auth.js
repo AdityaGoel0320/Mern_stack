@@ -70,26 +70,23 @@ router.post("/signin", async (req, res) => {
         if (userLogin) {
             const passwordIsMatch = await bcrypt.compare(password, userLogin.password);
 
+            let loginNewToken = await userLogin.generateAuthToken();
+
+
+            // now to save this token so we add in cookie in login page
+            res.cookie("jwtLogin", loginNewToken ,  {
+                        expires: new Date(Date.now() + 212452452),
+                        httpOnly: true,
+            }) ; 
+        
+
             if (!passwordIsMatch) {
                 return res.status(400).json({ error: "Invalid credentials wrong password" });
             } else {
                 
-
-                let loginNewToken = await userLogin.generateAuthToken();
-
-
-                // now to save this token so we add in cookie in login page
-                res.cookie("jwtLogin", loginNewToken)
-        
-        
-
                 return res.status(200).json({ message: "User logged in successfully" });
 
 
-                // res.cookie("jetToken", token, {
-                //     expires: new Date(Date.now() + 9999999999999),
-                //     httpOnly: true,
-                // });
             }
         } else {
             return res.status(400).json({ error: "User is not registered" });
