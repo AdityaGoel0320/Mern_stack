@@ -60,27 +60,43 @@ userSchema.pre("save", async function (next) {
 
 // jwt token 
 
-userSchema.methods.generateAuthToken = async function () {
-    try {
+// userSchema.methods.generateAuthToken = async function () {
+//     try {
 
 
-        let tokenGenerated = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
+//         let tokenGenerated = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
 
 
-        // now adding this new token in databse
+//         // now adding this new token in databse
 
-        this.tokenArray = this.tokenArray.concat({tokenObj:tokenGenerated})
-        await this.save();
+//         this.tokenArray = this.tokenArray.concat({tokenObj:tokenGenerated})
+//         await this.save();
 
 
-        return tokenGenerated ; 
+//         return tokenGenerated ; 
 
         
+//     } catch (error) {
+//         console.log("error in token fnc in scehma file")
+//     }
+// }
+
+userSchema.methods.generateAuthToken = async function () {
+    try {
+        let tokenGenerated = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+
+        // Append the new token to the tokenArray
+        this.tokenArray.push({ tokenObj: tokenGenerated });
+        
+        // Save the updated user object
+        await this.save();
+
+        return tokenGenerated;
     } catch (error) {
-        console.log("error in token fnc in scehma file")
+        console.error("Error in generateAuthToken:", error.message);
+        throw error; // Propagate the error
     }
 }
-
 
 
 

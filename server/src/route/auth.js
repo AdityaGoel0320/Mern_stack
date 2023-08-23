@@ -43,6 +43,7 @@ router.post("/register", async (req, res) => {
             if (userExist) {
                 return res.status(422).json({ error: "User already registered" });
             }
+            
 
             const newUserDetails = new User({ name, email, phone, work, password, cpassword });
             await newUserDetails.save();
@@ -74,10 +75,11 @@ router.post("/signin", async (req, res) => {
 
 
             // now to save this token so we add in cookie in login page
-            res.cookie("jwtLogin", loginNewToken ,  {
-                        expires: new Date(Date.now() + 212452452),
-                        httpOnly: true,
-            }) ; 
+            // res.cookie("jwtogin", loginNewToken, {
+            //     expires: new Date(Date.now() + 212452452),
+            //     httpOnly: true, // Corrected attribute name
+            // });
+            res.cookie("jwtogin", loginNewToken);
         
 
             if (!passwordIsMatch) {
@@ -97,6 +99,42 @@ router.post("/signin", async (req, res) => {
     }
 });
 
+// router.post("/signin", async (req, res) => {
+//     try {
+//         const { email, password } = req.body;
+
+//         if (!email || !password) {
+//             return res.status(400).json({ error: "Please provide valid email and password" });
+//         }
+
+//         const userLogin = await User.findOne({ email: email });
+
+//         if (userLogin) {
+//             const passwordIsMatch = await bcrypt.compare(password, userLogin.password);
+
+//             if (!passwordIsMatch) {
+//                 return res.status(400).json({ error: "Invalid credentials" });
+//             }
+
+//             // Generate a token associated with the user's session
+//             const loginNewToken = await userLogin.generateAuthToken();
+
+//             // Store the token in a HttpOnly cookie
+//             // res.cookie("jwtogin", loginNewToken, {
+//             //     expires: new Date(Date.now() + 212452452),
+//             //     httpOnly: true,
+//             // });
+//             res.cookie("jwtogin", loginNewToken);
+
+//             return res.status(200).json({ message: "User logged in successfully" });
+//         } else {
+//             return res.status(400).json({ error: "User is not registered" });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         return res.status(500).json({ error: "An error occurred while signing in" });
+//     }
+// });
 
 
 router.get("/about", Authenticate ,  (req, res) => {
