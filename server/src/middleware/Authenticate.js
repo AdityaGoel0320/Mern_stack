@@ -1,29 +1,32 @@
 
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
-const Authenticate = async (req, res, next) => {
+// const cookieParser = require("cookie-parser")
+const authenticate = async (req, res, next) => {
     try {
-        let token = req.cookies.jwtoken;
-        let verifyToken = jwt.verify(token , process.env.SECRET_KEY)
+        console.log("first")
+        let tokenFromCookie = req.cookies.jwtLogin;
+        console.log("token" + token)
+        let verifyToken = jwt.verify(tokenFromCookie, process.env.SECRET_KEY)
 
-        let rootUser = await User.findOne({_d : verifyToken._id , "tokens:token"   : token})
+        let rootUser = await User.findOne({ _id: verifyToken._id, "tokenArray.tokenObj": tokenFromCookie })
 
 
 
-        if(!rootUser){
+        if (!rootUser) {
             throw new Error("user not found")
 
         }
 
-        req.token = oken ; 
-        req.rootUser = rootUser ; 
-        req.userID  = rootUser._id
+        req.tokenFromCookie = tokenFromCookie;
+        req.rootUser = rootUser;
+        req.userID = rootUser._id
 
-        next() ; 
+        next();
     } catch (error) {
         res.status(400).send("unacuthoriuze")
         console.log(error)
     }
 
 }
-module.exports = Authenticate; 
+module.exports = authenticate; 

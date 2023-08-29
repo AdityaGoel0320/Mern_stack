@@ -3,11 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
-const Authenticate = require("../middleware/authenticate");
+const authenticate = require("../middleware/authenticate");
+const cookieParser = require('cookie-Parser')
 // const {  Authenticate } = require("../middleware/Authenticate");
 // const { SECRET_KEY } = require("../config"); // Import your secret key from a config file
 
-
+router.use(cookieParser());
 
 // for handling of form
 
@@ -76,15 +77,10 @@ router.post("/signin", async (req, res) => {
             const passwordIsMatch = await bcrypt.compare(password, userLogin.password);
 
             let loginNewToken = await userLogin.generateAuthToken();
-
-
             // now to save this token so we add in cookie in login page
-            // res.cookie("jwtogin", loginNewToken, {
-            //     expires: new Date(Date.now() + 212452452),
-            //     httpOnly: true, // Corrected attribute name
-            // });
-            res.cookie("jwtogin", loginNewToken);
-            console.log(req.cookies.jwtLogin)
+            res.cookie("jwtLogin", loginNewToken);
+            // res.cookie("jwtLogin", loginNewToken);
+            // console.log(req.cookies.jwtLogin)
 
             if (!passwordIsMatch) {
                 return res.status(400).json({ error: "Invalid credentials wrong password" });
@@ -141,7 +137,13 @@ router.post("/signin", async (req, res) => {
 // });
 
 
-router.get("/about", Authenticate ,  (req, res) => {
+// router.get("/about", authenticate ,  (req, res) => {
+//     console.log("about us ka page")
+//     res.send("Hello World from contact")
+// })
+
+
+router.get("/about" ,  (req, res) => {
     console.log("about us ka page")
     res.send("Hello World from contact")
 })

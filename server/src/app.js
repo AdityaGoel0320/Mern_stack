@@ -21,8 +21,8 @@ require("./db/conn")
 let User= require("./model/userSchema")
 
 
-let cookieParser = require("cookie-parser")
-app.use(cookieParser());
+// let cookieParser = require("cookie-parser")
+// app.use(cookieParser());
 
 
 // now making website understand data will conme in json 
@@ -38,11 +38,11 @@ app.use(require("./route/auth"))
 
 // app.use(express.urle)
 // middleware
-let middleware = (req, res, next) => {
-    console.log("this is my middleware")
-    // without next() page will go in infintie loading for about page 
-    next();
-}
+// let middleware = (req, res, next) => {
+//     console.log("this is my middleware")
+//     // without next() page will go in infintie loading for about page 
+//     next();
+// }
 // middleware();
 
 
