@@ -3,12 +3,12 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
-const authenticate = require("../middleware/authenticate");
-const cookieParser = require('cookie-Parser')
+const Authenticate = require("../middleware/Authenticate");
+// const cookieParser = require('cookie-Parser')
 // const {  Authenticate } = require("../middleware/Authenticate");
 // const { SECRET_KEY } = require("../config"); // Import your secret key from a config file
 
-router.use(cookieParser());
+// router.use(cookieParser());
 
 // for handling of form
 
@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/register", (req, res) => {
-    
+
     res.send("register page using get ");
 });
 
@@ -48,7 +48,7 @@ router.post("/register", async (req, res) => {
             if (userExist) {
                 return res.status(422).json({ error: "User already registered" });
             }
-            
+
 
             const newUserDetails = new User({ name, email, phone, work, password, cpassword });
             await newUserDetails.save();
@@ -75,17 +75,19 @@ router.post("/signin", async (req, res) => {
 
         if (userLogin) {
             const passwordIsMatch = await bcrypt.compare(password, userLogin.password);
-
             let loginNewToken = await userLogin.generateAuthToken();
+            const cookieOptions = {
+                httpOnly: true,
+                sameSite: 'strict',
+                path: 'http://localhost:3000/', // Set the path as needed for your application
+              };
             // now to save this token so we add in cookie in login page
-            res.cookie("jwtLogin", loginNewToken);
-            // res.cookie("jwtLogin", loginNewToken);
-            // console.log(req.cookies.jwtLogin)
+            res.cookie("jwtLogin", loginNewToken , cookieOptions);
 
             if (!passwordIsMatch) {
                 return res.status(400).json({ error: "Invalid credentials wrong password" });
             } else {
-                
+
                 return res.status(200).json({ message: "User logged in successfully" });
 
 
@@ -100,9 +102,9 @@ router.post("/signin", async (req, res) => {
 });
 
 
-router.get("/about" ,  (req, res) => {
+router.get("/about", Authenticate, (req, res) => {
     console.log("about us ka page")
-    res.send("Hello World from contact")
+    res.send("Hello World from about")
 })
 
 module.exports = router;

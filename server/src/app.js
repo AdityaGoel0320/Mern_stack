@@ -21,8 +21,8 @@ require("./db/conn")
 let User= require("./model/userSchema")
 
 
-// let cookieParser = require("cookie-parser")
-// app.use(cookieParser());
+let cookieParser = require("cookie-parser")
+app.use(cookieParser());
 
 
 // now making website understand data will conme in json 

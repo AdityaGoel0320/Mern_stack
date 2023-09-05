@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import randomImg from '../images/download.jpg';
+import axios from 'axios';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,13 +12,16 @@ export default function Login() {
   let loginUser = async (e) => {
     e.preventDefault();
     console.log(email)
-    let response = await fetch('http://localhost:8000/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await axios.post(
+      'http://localhost:8000/signin',
+      { email, password },
+      {
+        withCredentials: true, // Include cookies in the request
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     let data = await response.json();
 

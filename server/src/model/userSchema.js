@@ -75,7 +75,7 @@ userSchema.pre("save", async function (next) {
 
 //         return tokenGenerated ; 
 
-        
+
 //     } catch (error) {
 //         console.log("error in token fnc in scehma file")
 //     }
@@ -87,10 +87,10 @@ userSchema.methods.generateAuthToken = async function () {
 
         // Append the new token to the tokenArray
         this.tokenArray.push({ tokenObj: tokenGenerated });
-        
+
         // Save the updated user object
         await this.save();
-
+        console.log(tokenGenerated)
         return tokenGenerated;
     } catch (error) {
         console.error("Error in generateAuthToken:", error.message);
