@@ -30,7 +30,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 // cors 
-app.use(cors()) ; 
+// app.use(cors()) ; 
+app.use(cors({
+    origin: "http://localhost:3001", // Replace with your front-end's URL
+    credentials: true, // Include credentials (cookies) in the request
+  }));
+  
 
 
 // routing of pages

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import randomImg from '../images/download.jpg';
-import axios from 'axios';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,25 +10,27 @@ export default function Login() {
 
   let loginUser = async (e) => {
     e.preventDefault();
-    console.log(email)
-    const response = await axios.post(
-      'http://localhost:8000/signin',
-      { email, password },
-      {
-        withCredentials: true, // Include cookies in the request
+    console.log(email);
+
+    try {
+      const response = await fetch('http://localhost:9000/signin', {
+        method: 'POST',
+        credentials: 'include', // Include cookies in the request
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.status === 400) {
+        window.alert('Invalid login details');
+      } else {
+        window.alert('Login successful');
+        navigate('/');
       }
-    );
-
-    let data = await response.json();
-
-    if (response.status === 400 || !data) {
-      window.alert('Invalid login details');
-    } else {
-      window.alert('Login successful');
-      navigate('/');
+    } catch (error) {
+      console.error(error);
+      window.alert('Network Error: Unable to reach the server.');
     }
   };
 

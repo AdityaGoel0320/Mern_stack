@@ -35,8 +35,8 @@ let userSchema = new mongoose.Schema(
 
 
         // as token has to be added also
-        tokenArray: [{
-            tokenObj: {
+        tokens: [{
+            token: {
                 type: String,
                 required: true,
             }
@@ -86,7 +86,7 @@ userSchema.methods.generateAuthToken = async function () {
         let tokenGenerated = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
 
         // Append the new token to the tokenArray
-        this.tokenArray.push({ tokenObj: tokenGenerated });
+        this.tokens.push({ token: tokenGenerated });
 
         // Save the updated user object
         await this.save();

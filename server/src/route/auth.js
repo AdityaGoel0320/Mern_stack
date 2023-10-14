@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../model/userSchema");
-const Authenticate = require("../middleware/Authenticate");
+const authenticate = require("../middleware/authenticate");
 // const cookieParser = require('cookie-Parser')
 // const {  Authenticate } = require("../middleware/Authenticate");
 // const { SECRET_KEY } = require("../config"); // Import your secret key from a config file
@@ -75,11 +75,13 @@ router.post("/signin", async (req, res) => {
 
         if (userLogin) {
             const passwordIsMatch = await bcrypt.compare(password, userLogin.password);
+
             let loginNewToken = await userLogin.generateAuthToken();
+            
             const cookieOptions = {
                 httpOnly: true,
                 sameSite: 'strict',
-                path: 'http://localhost:3000/', // Set the path as needed for your application
+                path: 'http://localhost:3001/', // Set the path as needed for your application
               };
             // now to save this token so we add in cookie in login page
             res.cookie("jwtLogin", loginNewToken , cookieOptions);
@@ -102,9 +104,9 @@ router.post("/signin", async (req, res) => {
 });
 
 
-router.get("/about", Authenticate, (req, res) => {
+router.get("/about", authenticate, (req, res) => {
     console.log("about us ka page")
-    res.send("Hello World from about")
+    res.send(req.rootUser)
 })
 
 module.exports = router;

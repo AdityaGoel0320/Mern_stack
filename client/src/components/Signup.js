@@ -40,7 +40,7 @@ export default function Signup() {
     let { name, email, phone, work, password, cpassword } = obj;
     console.log(obj)
 
-    let response = await fetch("http://localhost:8000/register", {
+    let response = await fetch("http://localhost:9000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json" , 
