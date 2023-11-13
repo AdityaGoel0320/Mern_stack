@@ -5,10 +5,6 @@ dotenv.config({path:"./config.env"})
 
 let cors = require("cors")
 
-
-
-
-
 // importing important npm packages
 let express = require("express");
 let app = express();
